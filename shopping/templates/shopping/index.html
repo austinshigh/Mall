@@ -1,0 +1,22 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <h2>{{ header }}</h2>
+    <div class="product">
+        {% for listing in listings %}
+            <div> 
+                <a href="{% url 'listing' listing.id %}">
+                {{ listing.title }}
+                <img class="rounded listing-photo" data-photo="{{listing.id}}" src="{{ listing.url }}">
+                {% if listing.url2 != null %}
+                <img class="rounded hidden" data-photo="{{listing.id}}" src="{{ listing.url2 }}">
+                {% endif %}
+                </a>
+            </div>
+            <div>${{ listing.price }}</div>
+        {% empty %}
+            <div>No listings.</div>
+        {% endfor %}
+    </div>
+{% endblock %}

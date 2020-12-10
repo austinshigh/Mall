@@ -1,0 +1,75 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <h2>{{ listing.title }}</h2>
+
+    <div id="product-info">
+        <div class=listing-photos>
+            <img
+                class="rounded listing-photo"
+                data-photo="{{ listing.id }}"
+                src="{{ listing.url }}"
+                alt="No Image Available"
+            />
+            {% if listing.url2 != null %}
+                <img
+                    class="rounded hidden"
+                    data-photo="{{ listing.id }}"
+                    src="{{ listing.url2 }}"
+                    alt="No Image Available"
+                />
+            {% endif %}
+        </div>
+        <div>
+            Price: ${{ listing.price }}
+        </div>
+        <div>
+            Description: {{ listing.description }}
+        </div>
+        {% if listing.category.name is not blank %}
+            <div>
+                Category: {{ listing.category.name }}
+            </div>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <div>
+                <form action="{% url 'cart' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="hidden" name="add-cart" value="{{ listing.id }}">
+                    <button type="submit" class="btn">Add to Cart</button>
+                </form>
+            </div>
+            <div class="container p-3 my-3 border">
+                <form action="{%url 'review' listing.id%}" id="review-form" method="POST">
+                    {% csrf_token %}
+                    {{ reviewForm }}
+                    <div><button type="submit" value="review" class="btn"> Post Review</button></div>
+                </form>
+            </div>
+        {% else %}
+        {% endif %}
+        <div>
+            {% for review in reviews %}
+                <div class="p-3 my-3 border"> 
+                    {{ review.text }}
+                    <div>Review By: {{ review.username }}</div>
+                    <div>On: {{ review.date }}</div>
+                    <input
+                        type="image"
+                        class="like"
+                        data-review="{{review.id}}"
+                        src="https://images.onlinelabels.com/images/clip-art/SavanaPrice/Thumbs%20Up-192852.png"
+                        alt="Thumbs Up:"
+                    />
+                    <div class="counter" data-review="{{review.id}}">{{ review.like.count }}</div>
+                    <div>Users found this review helpful</div>
+                </div>
+            {% empty %}
+                <div>No Reviews.</div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Thumbs-Up Image: https://images.onlinelabels.com/images/clip-art/SavanaPrice/Thumbs%20Up-192852.png -->
+{% endblock %}

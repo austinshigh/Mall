@@ -1,0 +1,68 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+
+    <div id="cart-view">
+        <h2>Cart</h2>
+        <div>
+            <div>
+                <div class="container p-3 my-3 border">
+                    <div>Item</div>
+                    <div>Price</div>
+                    <div>Quantity</div>
+                </div>
+                {% for listing in cart %}
+                    <div class="container p-3 my-3 border item" data-listing="{{ listing.listing.id }}">
+                        <div>
+                            <a href="{% url 'listing' listing.listing.id %}">
+                            {{ listing.listing.title }}</a>
+                        </div>
+                        <div>${{ listing.listing.price }}</div>
+                        <div>
+                            <input
+                                type="text"
+                                value="{{ listing.quantity }}"
+                                data-listing="{{ listing.listing.id }}"
+                                class="quant-input"
+                            >
+                            <input
+                                type="button"
+                                value="Update Quantity"
+                                data-listing="{{ listing.listing.id }}"
+                                class="update-q btn btn-primary"
+                            >
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="container p-3 my-3 border">Cart Empty.</div>
+                {% endfor %}
+                {% if cart %}
+                    <div>
+                        <div class="container p-3 my-3 border" id="total"> Total = ${{ total }} </div>
+                    </div>
+                    <div>
+                        <div class="container">
+                            <button type="button" id="check-out" class="btn">Check Out</button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div id="loading-view" class="hidden">
+        <h2> Processing Your Order...</h2>
+        <img
+            id="loading"
+            src=https://i.etsystatic.com/13221305/r/il/dcb12b/1550187633/il_570xN.1550187633_g1ti.jpg
+            alt="loading..."
+        />
+    </div>
+    <div id="received-view" class="hidden">
+        <h2>Your Order Has Been Received!</h2>
+        <div class="container p-3 my-3 border">
+            You have been emailed a receipt. Please retain this order number for your records:
+            <div id="invoice-number">#{{ invoice.id }}</div>
+        </div>
+    </div>
+{% endblock %}
+<!-- Loading Icon Reference: https://i.etsystatic.com/13221305/r/il/dcb12b/1550187633/il_570xN.1550187633_g1ti.jpg -->

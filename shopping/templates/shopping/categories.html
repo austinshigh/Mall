@@ -1,0 +1,16 @@
+{% extends "shopping/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+        <div class="categories">
+            {% for category in categories %}
+                <div> 
+                    <a href="{% url 'category' category.id %}">
+                        {{ category.name }}
+                    </a>
+                </div>
+            {% empty %}
+                <div>No listings.</div>
+            {% endfor %}
+        </div>
+{% endblock %}
