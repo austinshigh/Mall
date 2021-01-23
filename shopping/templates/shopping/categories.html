@@ -3,10 +3,11 @@
 {% block body %}
     <h2>Categories</h2>
         <div class="categories">
+            <hr>
             {% for category in categories %}
                 <div> 
                     <a href="{% url 'category' category.id %}">
-                        {{ category.name }}
+                        <h4>{{ category.name }}</h4>
                     </a>
                 </div>
             {% empty %}

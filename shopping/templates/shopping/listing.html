@@ -44,7 +44,7 @@
                 <form action="{%url 'review' listing.id%}" id="review-form" method="POST">
                     {% csrf_token %}
                     {{ reviewForm }}
-                    <div><button type="submit" value="review" class="btn"> Post Review</button></div>
+                    <div><br><button type="submit" value="review" class="btn"> Post Review</button></div>
                 </form>
             </div>
         {% else %}

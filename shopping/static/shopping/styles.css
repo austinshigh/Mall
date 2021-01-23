@@ -1,5 +1,15 @@
+#signin{
+    text-align: left;
+}
+
 body {
-    padding: 20px;
+    padding: 400px;
+    padding-top: 50px;
+    font-family: 'Fjalla One';
+}
+
+#title{
+    text-align: center;
 }
 
 .hidden {
@@ -10,13 +20,22 @@ h2, #product-info, .product, .categories {
     text-align: center;
 }
 
-img {
+img{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 200px;
+    height: 300px;
 }
 
+@media screen and (max-width:800px) {
+img {
+    height: 400px;
+}
+body {
+    padding: 20px;
+}
+
+}
 .btn {
     appearance: none;
 	border: 0;
@@ -48,4 +67,14 @@ img {
 .container {
     display: flex;
     justify-content: space-evenly;
+}
+
+a:link{
+    text-decoration: none;
+    font-size: large;
+    color:black;
+}
+
+a{
+    color:black;
 }

@@ -6,15 +6,16 @@
     <div class="product">
         {% for listing in listings %}
             <div> 
+                <hr>
                 <a href="{% url 'listing' listing.id %}">
-                {{ listing.title }}
                 <img class="rounded listing-photo" data-photo="{{listing.id}}" src="{{ listing.url }}">
+                <div>${{ listing.price }}</div>
+                {{ listing.title }}
                 {% if listing.url2 != null %}
                 <img class="rounded hidden" data-photo="{{listing.id}}" src="{{ listing.url2 }}">
                 {% endif %}
                 </a>
             </div>
-            <div>${{ listing.price }}</div>
         {% empty %}
             <div>No listings.</div>
         {% endfor %}
